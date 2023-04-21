@@ -1,11 +1,11 @@
 import type { Component } from 'solid-js';
-import Dashboard from './layout/Dashboard';
+import HomeLayout from './layout/HomeLayout';
 
 const App: Component = () => {
 
   
   return (
-    <Dashboard />
+    <HomeLayout />
   );
 };
 
