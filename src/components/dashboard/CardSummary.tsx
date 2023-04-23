@@ -1,4 +1,4 @@
-import { Component } from "solid-js";
+import { Component, JSXElement } from "solid-js";
 import { BsCalendar4 } from "solid-icons/bs";
 import { FaRegularRectangleList } from 'solid-icons/fa'
 import { HiSolidPhoneMissedCall } from 'solid-icons/hi'
@@ -12,6 +12,9 @@ interface Props {
     cardType:keyof typeof cardTypeStyle;
     title:string;
     subTitle?:string;
+    current:number;
+    total?:number;
+    children:JSXElement;
 }
 
 
@@ -59,14 +62,18 @@ const CardSummary: Component<Props> = (props) => {
     </div>
   </header>
   <main class="flex justify-start gap-2 items-baseline">
-    <span class="font-extrabold text-xl text-neutral-900">12</span>
-    <span class="text-neutral-400"> /</span>
-    <span>24</span>
+    <span class="font-extrabold text-xl text-neutral-900">{props.current}</span>
+    { props.total && 
+      <>
+          <span class="text-neutral-400"> /</span>  
+          <span>{props.total}</span>
+      </>
+    }
   </main>
-  <footer class="flex justify-start gap-2">
-    <p class="text-sm text-green-700 font-semibold">50%</p>
-    <p class="text-sm text-neutral-400 font-semibold">Half behind you!</p>
-  </footer>
+  {
+    props.children
+  }
+
 </div>;
 };
 

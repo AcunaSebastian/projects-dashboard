@@ -42,13 +42,17 @@ const menuList = [
 const Sidebar: Component<{}> = (props) => {
   return (
     <aside class="
-    h-screen 
+    fixed
+    top-0
+    bottom-0
+    z-50
     w-32 
     flex 
     flex-col 
     items-center 
     justify-between 
     space-y-5
+    py-20
     bg-neutral-50"> 
 
     <header class="p-3">
