@@ -1,11 +1,32 @@
 import type { Component } from 'solid-js';
-import HomeLayout from './layout/HomeLayout';
+import { Dashboard } from './components/dashboard/Dashboard';
+import Sidebar from './components/sidebar/Sidebar';
+import Navbar from './components/Navbar';
+import { Route, Routes } from '@solidjs/router';
 
 const App: Component = () => {
 
   
   return (
-    <HomeLayout />
+    <main class="min-h-screen h-screen flex">
+
+    {/* sidebar */}
+    <Sidebar />
+
+    <section class="flex-1 ml-[128px]">
+    {/* navbar */}
+    <Navbar />
+
+    {/* dashboard */}
+    
+    <Routes>
+      <Route  path={"/"} element={<Dashboard />} />
+      <Route  path={"/settings"} element={<div>settings</div>} />
+    </Routes>
+    
+    </section>
+  
+  </main>
   );
 };
 

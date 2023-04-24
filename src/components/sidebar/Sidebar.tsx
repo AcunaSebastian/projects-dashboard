@@ -1,4 +1,4 @@
-import { Component, For } from "solid-js";
+import { Component, For, createResource, createSignal } from "solid-js";
 import logo from '../../logo.svg';
 import { MenuItem } from "./MenuItem";
 import { AiOutlineInbox } from 'solid-icons/ai'
@@ -6,40 +6,61 @@ import { FaRegularUser, FaRegularClock } from 'solid-icons/fa'
 import { RiHealthFirstAidKitFill, RiDocumentTodoFill } from 'solid-icons/ri'
 import { BsCalendar4 } from 'solid-icons/bs'
 import { IoSettingsOutline } from 'solid-icons/io'
+import { A } from "@solidjs/router";
 
 
 const menuList = [
   {
+    id:1,
     isSelected: true,
-    icon:<AiOutlineInbox class="text-xl"/>
+    icon:<AiOutlineInbox class="text-xl"/>,
+    ref:'/'
   },
   {
+    id:2,
     isSelected: false,
-    icon:<FaRegularUser class="text-xl"/>
+    icon:<FaRegularUser class="text-xl"/>,
+    ref:'/'
   },
   {
+    id:3,
     isSelected: false,
-    icon:<RiHealthFirstAidKitFill class="text-xl"/>
+    icon:<RiHealthFirstAidKitFill class="text-xl"/>,
+    ref:'/'
   },
   {
+    id:4,
     isSelected: false,
-    icon:<RiDocumentTodoFill class="text-xl"/>
+    icon:<RiDocumentTodoFill class="text-xl"/>,
+    ref:'/'
   },
   {
+    id:5,
     isSelected: false,
-    icon:<BsCalendar4 class="text-xl"/>
+    icon:<BsCalendar4 class="text-xl"/>,
+    ref:'/'
   },
   {
+    id:6,
     isSelected: false,
-    icon:<FaRegularClock class="text-xl"/>
+    icon:<FaRegularClock class="text-xl"/>,
+    ref:'/'
   },
   {
+    id:7,
     isSelected: false,
-    icon:<IoSettingsOutline class="text-xl"/>
+    icon:<IoSettingsOutline class="text-xl"/>,
+    ref:'/settings'
   },
 ]
 
 const Sidebar: Component<{}> = (props) => {
+
+  const [menuSelected, setMenuSelected ] = createSignal(menuList[0].id);
+
+  const handleClick = (id:number) => {
+    setMenuSelected(id);
+  }
   return (
     <aside class="
     fixed
@@ -65,7 +86,9 @@ const Sidebar: Component<{}> = (props) => {
             each={menuList} 
             fallback={<div>Loading...</div>} 
             children={(item) => 
-              <MenuItem isSelected={item.isSelected} icon={item.icon}  />
+              <A href={item.ref!}>
+                <MenuItem  id={item.id} isSelected={menuSelected} icon={item.icon} onClick={() => handleClick(item.id)} />
+              </A>
             }/>
         </ul>
     </section>
